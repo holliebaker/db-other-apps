@@ -1,0 +1,84 @@
+[
+  {
+    "author": "Terry Pratchett",
+    "average_rating": 4.333333333333333,
+    "genres": [
+      "Fantasy",
+      "Comedy"
+    ],
+    "id": 1,
+    "number_of_ratings": 6,
+    "title": "The Truth"
+  },
+  {
+    "author": "Terry Pratchett",
+    "average_rating": null,
+    "genres": [
+      "Fantasy",
+      "Comedy"
+    ],
+    "id": 2,
+    "number_of_ratings": 0,
+    "title": "Jingo"
+  },
+  {
+    "author": "Terry Pratchett",
+    "average_rating": null,
+    "genres": [
+      "Fantasy",
+      "Comedy",
+      "Childrens"
+    ],
+    "id": 3,
+    "number_of_ratings": 0,
+    "title": "Only You Can Save Mankind"
+  },
+  {
+    "author": "Douglas Adams",
+    "average_rating": null,
+    "genres": [
+      "Fantasy",
+      "Comedy",
+      "Science Fiction"
+    ],
+    "id": 4,
+    "number_of_ratings": 0,
+    "title": "Hitchhikers Guide To The Galaxy"
+  },
+  {
+    "author": "Douglas Adams",
+    "average_rating": null,
+    "genres": [
+      "Fantasy",
+      "Comedy",
+      "Detective"
+    ],
+    "id": 5,
+    "number_of_ratings": 0,
+    "title": "Dirk Gently's Holistic Detective Agency"
+  },
+  {
+    "author": "Lewis Caroll",
+    "average_rating": null,
+    "genres": [
+      "Fantasy",
+      "Childrens"
+    ],
+    "id": 6,
+    "number_of_ratings": 0,
+    "title": "Alice In Wonderland"
+  },
+  {
+    "author": "Lewis Caroll",
+    "average_rating": null,
+    "genres": [
+      "Fantasy",
+      "Comedy",
+      "Poetry"
+    ],
+    "id": 7,
+    "number_of_ratings": 0,
+    "title": "The Jabberwocky"
+  }
+]
+
