@@ -9,6 +9,11 @@ def with_labels(rows, labels):
 # create a flask app
 app = Flask(__name__)
 
+# lets you test the app is ronnung
+@app.route('/', methods=['GET', 'POST'])
+def hello_world():
+    return "Hello, world!", 200
+
 # retrieve all books
 @app.route('/books', methods=['GET'])
 def find_all():
@@ -27,5 +32,5 @@ def rate(book_id):
     return jsonify({ "stars": stars }), 201
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="127.0.0.1", port=8000, debug=True)
 

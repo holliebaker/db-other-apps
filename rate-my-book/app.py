@@ -8,6 +8,11 @@ def with_labels(rows, labels):
 
 app = Flask(__name__)
 
+# lets you test the app is ronnung
+@app.route('/', methods=['GET', 'POST'])
+def hello_world():
+    return "Hello, world!", 200
+
 # retrieve all books
 @app.route('/books', methods=['GET'])
 def find_all():

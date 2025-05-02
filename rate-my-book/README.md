@@ -23,6 +23,70 @@ python3 -m venv venv
 pip3 install Flask
 ```
 
+
+## Hello world
+
+Take a look at the starter code in `app_starter.py`.
+
+The code below creates a web server.
+
+```python
+# create a flask app
+app = Flask(__name__)
+```
+
+This code runs when the program starts (it's python's main function). It starts up the web server.
+```python
+# start the app on localhost (127.0.0.1), port 8000
+if __name__ == '__main__':
+    app.run(host="1270.0.0.1", port=8000, debug=True)
+```
+
+Each "route" matches on the URL and the HTTP method used.
+```python3
+@app.route('/', methods=['GET', 'POST'])
+def hello_world():
+    return "Hello, world!", 200
+```
+
+Run `app_starter.py`. You should see something like this:
+```
+$ python3 app_starter.py
+ * Serving Flask app 'app_starter'
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:8000
+Press CTRL+C to quit
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 157-973-405
+```
+
+Go to `http://127.0.0.1:8000` in a web browser, where you should see a page showing `Hello, world!` and an entry in your
+terminal (or wherever your running `app_starter.py`) like this:
+```
+127.0.0.1 - - [02/May/2025 20:45:30] "GET / HTTP/1.1" 200 -
+```
+You can also use `print(...)` statements to print stuff to the logs.
+
+## Postman
+
+[Postman](https://www.postman.com/) is an app which lets you make HTTP requests. It may be helpful in testing your API.
+It can either be installed or used [via your web browser](https://go.postman.co/home), but they force you to log in (sigh).
+
+You can make the same request as you did in the web browser by doing a `GET`.
+
+![Get request in Postman](./get.png)
+
+Postman can also do POST, PUT, PATCH and DELETE requests (select the method from the dropdown on the left). You can send
+JSON data in the request body as follows:
+
+1. Below the box where you enter the URL, select the "Body" tab.
+2. Below the tabs, select "Raw" and on the right, in the dropdown, select "JSON".
+3. Enter your JSON in the text box below.
+
+![post request in Postman](./post.png)
+
 ## Make a RESTful API using flask
 
 ```python
@@ -132,12 +196,27 @@ def create():
 
 # Your Task
 
-- Take a look at the `app_starter.py`, which defines the two endpoints.
-
 - In `setup-db_starter.py`, define your schema and insert some test data.
+
+- Take a look at the rest of `app_starter.py`. Note the two endpoints `GET /books` and `POST /books/<id>/ratings/`.
 
 - Complete the `GET` endpoint in `app_starter.py` to return all books, along with their average rating and number of
   ratings.
 
 - Complete the `POST` endpoint in `app_starter.py` to add a rating.
 
+- I have finished, what now?
+
+Do your S2 assessment?
+
+But I'm procrastinating really, really hard and would rather do *anything* else. 
+
+Alright, how about these extension tasks?
+  
+	- Create a `GET /books/<id>` endpoint to retrieve info for an individual book. 
+
+	- Create a POST endpoint for `/books` to add a new book. 
+	
+	- Create a `PUT` (to update) and `DELETE` endpoints for books. Now you have a full REST api!
+	
+	- Add more to your ratings system, e.g., allow the user to leave their name or a message. 
