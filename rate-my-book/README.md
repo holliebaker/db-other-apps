@@ -46,6 +46,11 @@ Each "route" matches on the URL and the HTTP method used.
 ```python3
 @app.route('/', methods=['GET', 'POST'])
 def hello_world():
+    # return <request-body>, <status-code>
+    # request-body is the data to be sent back. in this case it's text, but jsonify(...) lets you turn a python
+    # dictionary into json
+    # status-code is the HTTP status, see [MDN documentaton
+    # here](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status).
     return "Hello, world!", 200
 ```
 
@@ -72,7 +77,7 @@ You can also use `print(...)` statements to print stuff to the logs.
 ## Postman
 
 [Postman](https://www.postman.com/) is an app which lets you make HTTP requests. It may be helpful in testing your API.
-It can either be installed or used [via your web browser](https://go.postman.co/home), but they force you to log in (sigh).
+It can either be installed or used [via your web browser](https://go.postman.co/home), but the browser version forces you to log in (sigh).
 
 You can make the same request as you did in the web browser by doing a `GET`.
 
@@ -209,14 +214,14 @@ def create():
 
 Do your S2 assessment?
 
-But I'm procrastinating really, really hard and would rather do *anything* else. 
+But I'm procrastinating really, really hard and would rather do *anything* else.
 
 Alright, how about these extension tasks?
-  
-	- Create a `GET /books/<id>` endpoint to retrieve info for an individual book. 
 
-	- Create a POST endpoint for `/books` to add a new book. 
-	
+	- Create a `GET /books/<id>` endpoint to retrieve info for an individual book.
+
+	- Create a POST endpoint for `/books` to add a new book.
+
 	- Create a `PUT` (to update) and `DELETE` endpoints for books. Now you have a full REST api!
-	
-	- Add more to your ratings system, e.g., allow the user to leave their name or a message. 
+
+	- Add more to your ratings system, e.g., allow the user to leave their name or a message.
