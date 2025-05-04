@@ -7,6 +7,16 @@ theme: hollies-slides
 
 # Databases In Other Applications
 
+---
+
+# By the end of this session you will:
+
+  - Understand what is meant by system architecture, layers and tiers.
+
+  - Understand and give examples of applications using the three layer model and two and three tier architectures.
+
+  - Learn about ReST APIs and build a simple web app.
+
 
 ---
 

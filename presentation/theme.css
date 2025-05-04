@@ -84,4 +84,6 @@ section.right-img p {
   grid-row: 2 / -1;
 }
 
-
+ul ol {
+  list-style: decimal ;
+}
