@@ -1,0 +1,87 @@
+/* @theme hollies-slides */
+
+@import 'default';
+
+/* title page */
+
+section {
+  display: grid;
+  grid-template-columns: 60% 40%;
+  grid-template-rows: max-content min-content;
+  align-content: start;
+  justify-content: start;
+}
+
+section.titlepage{
+  --s: 202px; /* control the size*/
+  --c1: #b0cff4;
+  --c2: #ffffff;
+  --c3: #d6e6f9;
+  
+  --_g: var(--c3) 0 120deg,#0000 0;
+  background:
+    conic-gradient(from -60deg at 50% calc(100%/3),var(--_g)),
+  conic-gradient(from 120deg at 50% calc(200%/3),var(--_g)),
+  conic-gradient(from  60deg at calc(200%/3),var(--c3) 60deg,var(--c2) 0 120deg,#0000 0),
+  conic-gradient(from 180deg at calc(100%/3),var(--c1) 60deg,var(--_g)),
+  linear-gradient(90deg,var(--c1)   calc(100%/6),var(--c2) 0 50%,
+                        var(--c1) 0 calc(500%/6),var(--c2) 0);
+  background-size: calc(1.732*var(--s)) var(--s);
+  background-color: var(--c3);
+
+  text-align: center
+}
+
+
+section.titlepage h1{
+  font-size: 3em;
+}
+
+section.titlepage.invert {
+  --c1: #e0f7cd;
+  --c2: #ffffff;
+  --c3: #eef9e5;
+}
+
+h1, h2, h3 {
+  color: #ce3178;
+}
+
+section.titlepage h1 {
+  margin-bottom: 0; border-bottom: none;
+  font-size: 3em;;
+}
+
+section.titlepage.invert h1 { 
+  font-size: 2.5em;
+}
+
+h1 {
+  font-size: 2em;
+  border-bottom: 5px solid #3a81d8;
+  padding-bottom: 0.5em;
+  margin-bottom: 1em;
+}
+
+section.titlepage.invert h1, section.titlepage.invert h2, section.titlepage.invert h3 {
+  color: #3a81d8;
+}
+
+strong {
+  color: #69a33a;
+}
+
+section > *, section.right-img h1 {
+  grid-column: 1 / -1;
+}
+
+section.right-img > ul, section.right-img ol {
+  grid-column: 1 / 1;
+}
+
+section.right-img p {
+  grid-column: 2 / -1;
+  grid-row: 2 / -1;
+}
+
+

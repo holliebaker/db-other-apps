@@ -1,0 +1,123 @@
+/*@theme codelab */
+
+@import 'gaia';
+
+section h1{
+    font-size: 54px;
+}
+
+section h2{
+    font-size: 36px;
+}
+
+section h3{
+    font-size: 28px;
+}
+
+
+img[src*='#ico-right']{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 10%;
+}
+
+img[src*='#right']{
+    position: relative !important;
+    float:right;
+}
+video{
+    display: block;
+    margin: 50px auto;
+    width: 90%;
+}
+
+section.lead{
+    background-image: url("../assets/backgrounds/code-bg.svg");
+    background-repeat: repeat;
+    background-size: 15%;
+}
+
+section.lead h1{
+    font-size: 68px;
+}
+
+section.lead.invert{
+    background-image: url("../assets/backgrounds/main-bg.svg");
+    background-repeat: repeat;
+    background-size: 50%;
+}
+
+section.threes{
+    columns: 3;
+    display: block;
+}
+ section.twos{
+    columns: 2;
+    display: block;
+}
+
+section.threes h1, section.twos h1{
+    column-span: all;
+}
+
+section.threes h2, section.twos h2{
+    break-before: column;
+    font-size: 28px;
+}
+
+section.threes p, section.twos p, section.threes ul li, section.twos ul li{
+    font-size: 28px;
+}
+
+section.big-img img{
+    display: block;
+    margin: auto;
+    width: 50%;
+}
+
+section.small-txt{
+    font-size: 28px;
+}
+
+section.right-img img {
+    position: absolute;
+    top: 100px;
+    right: 100px;
+}
+section.right-img    p{
+    width: 70%;
+}
+
+section.full-code h1{
+    font-size: 40px;
+}
+section.full-code pre{
+    font-size: 24px;
+}
+
+li li{
+    font-size: 26px;
+}
+
+pre{
+    background-color: black;
+}
+
+section.two-code{
+    columns: 2;
+    display: block;
+}
+
+section.two-code h1{
+    column-span: all;
+}
+
+section.two-code pre{
+    break-before: column;
+    font-size: 28px;
+}
+
+section.two-code p, section.two-code ul li{
+    font-size: 28px;
+}
