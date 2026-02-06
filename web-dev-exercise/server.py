@@ -1,5 +1,4 @@
 from flask import Flask, jsonify, request
-import sqlite3
 
 # create a flask app
 app = Flask(__name__)
