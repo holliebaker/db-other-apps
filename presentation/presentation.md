@@ -5,17 +5,19 @@ theme: hollies-slides
 ---
 <!-- _class: titlepage -->
 
-# Databases In Other Applications
+# Web APIs
+
+## Based on "Databases in other applications"
+
+Credit: Ed Longford
 
 ---
 
-# By the end of this session you will:
+# Plan for today...
 
-  - Understand what is meant by system architecture, layers and tiers.
-
-  - Understand and give examples of applications using the three layer model and two and three tier architectures.
-
-  - Learn about ReST APIs and build a simple web app.
+- **Tiers and layers**: a quick overviww (you may have seen this in databases...)
+- **Rest APIs**: what they are, and how to build them.
+- **Coding challenge**: build a web app in JavaScript which uses a rest API.
 
 
 ---
@@ -32,21 +34,21 @@ theme: hollies-slides
 
   - Here we'll mostly be looking at hardware architecture.
 
-- **Tier**: collection of hardware components -- the system is split into tiers.
+  - **Tier**: collection of hardware components -- the system is split into tiers.
 
   - Historically physical, but could also include logical.
 
-  - Typically **1**, **2**, and **3** tier architectures.
-
+  - Typically one, two and three tiered architectures are used. 
+  
 - **Layers:** different from tiers, another way of dividing up a system by splitting up logical components.
 
 ---
 
 # Hardware Architecture
 
-- Each piece of hardware is viewed as a black box.
+- Each piece of hardware is viewed as a "*black box*".
 
-- So we only need to care about **what it does** and **how it communicates**.
+- All we need to know is it's expected inputs and outputs - we don't need to care about its implementation details.
 
 - E.g., a database server stores data, which is manipulated or accessed using some kind of program.
 
@@ -62,11 +64,9 @@ theme: hollies-slides
 
 # One tier architecture
 
-- Everything is contained in one (physical or virtual) server or computer.
+- Everything is contained in one program / physical server
 
-- All programs you've made on this course so far are (likely) one tier.
-
-- Simplest but least secure -- if it breaks or is compromised then all is lost!
+- Simplest, but least robust and secure. 
 
 ![Eton mess: a mixture of fruit, meringue and cream](./eton-mess.jpg)
 
@@ -96,10 +96,9 @@ theme: hollies-slides
 
     - User interface -- the pretty part which the user sees and interacts with.
 
-    - Typically HTML/CSS/JavaScript, or a graphics package for C, C++, C#, Java.
+    - HTML, CSS and JavaScript -- you've been decorating deserts during Web Dev 1 so far...
 
 ![Decorated top of lemon meringue pie](./lemon-meringue-top.jpg)
-
 
 ---
 
@@ -111,10 +110,9 @@ theme: hollies-slides
 
     - handles calculations and operations, providing a link between the user interface and the database.
 
-    - Potentially any language, in web apps it's typically PHP but could be Python, JavaScript, Java. etc.
+    - Potentially any language, in web apps it was historically PHP but could be almost any language: Ruby, Python, JavaScript, Java...
 
 ![Cut meringue showing gooey centre](./cut-meringue.jpg)
-
 
 ---
 
@@ -126,28 +124,15 @@ theme: hollies-slides
 
     - Where all data is stored, application layer modifies / inserts / retrieves data and passes it to the presentation layer to be shown to the user.
 
-    - Commonly SQL, but could also be NoSQL.
-
+    - Commonly a database.
 
 ![Lemon curd](./lemon-curd.jpg)
 
 ---
 
-# Three Layer Example
+# Today, we'll focus on the presentation and application layers...
 
-Bob wants to buy a non-existent chocolate bar from Alice's Codelab I vending machine.
-
-- **Presentation**: Bob runs the application and is greeted with a user interface only a programmer could love. With some difficulty, Bob chooses a chocolate bar.
-
-- **Application**: Alice's code stores Bob's choice and checks whether the item is in stock.
-
----
-
-- **Data**: Stock is stored in a text file. Alice's program determined that there is at least one chocolate bar in stock, deducts one from the stock remaining, and stores this value back in the text file.
-
-- **Application**: having determined the item is in stock and Bob has entered sufficient (non-existent) money, it returns a success value to the `display` function, ...
-
-- **Presentation**: ...which displays the amount of (fake) change and the fact that Bob's (pretend) chocolate has been dispensed.
+We'll leave the database layer for Ed ;)
 
 ---
 
@@ -195,11 +180,11 @@ Bob wants to buy a non-existent chocolate bar from Alice's Codelab I vending mac
 
 # Three Tier Architecture
 
-- Like a correctly constructed scone.
+- Like a **correctly constructed** scone.
 
-- A presentation layer of clotted cream,
+  - A presentation layer of clotted cream,
 
-- with an application layer of jam sticking it all together.
+  - with an application layer of jam sticking it all together.
 
 ![A scone topped with jam (first) and cream](./scone.jpg)
 
@@ -209,14 +194,13 @@ Bob wants to buy a non-existent chocolate bar from Alice's Codelab I vending mac
 
 Determine how the three layers in the following examples could be distributed across a two-tier architecture:
 
-1. Vending machine example we saw earlier.
+1. The CodeLab I Vending Machine 
 
 2. Minerva (submitting an assignment).
 
 3. Ticket machine in a train station.
 
 ---
-
 <!-- _class: titlepage invert -->
 
 # Web Apps and ReSTful APIs
@@ -225,21 +209,15 @@ Determine how the three layers in the following examples could be distributed ac
 
 # Another Three Layer Architecture
 
-- Pretty web frontend
+- **Client**: pretty web frontend
 
-- Uses HTTP requests to communicate with a server backend.
+  - Uses HTTP requests to communicate with a server backend.
 
-- Server processes HTTP requests.
+- **Server**: processes HTTP requests.
 
-- It retrieves data from and modifies data in the database.
+  - Retrieves data from and modifies data in the database.
 
----
-
-# Tiered Architecture
-
-- Two or three tier architecture?
-
-- If two tier, then how would you split the layers?
+  - Sends a *response* back to the client.
 
 ---
 
@@ -249,7 +227,7 @@ Determine how the three layers in the following examples could be distributed ac
 
 - Based around **resources**: i.e., documents, data entities.
 
-- Uses HTTP methods to create a specification for how client and server should interact in order to manipulate resources.
+- Uses HTTP methods (GET, POST, etc) to create a specification for how client and server should interact in order to manipulate resources.
 
 ---
 
@@ -273,18 +251,21 @@ Determine how the three layers in the following examples could be distributed ac
 
 # How it works
 
-- Client makes an HTTP request to an **API endpoint**, :q
-
+- Client makes an HTTP request to an **API endpoint**,
 
     - identified by its url, e.g., `api/v1/discworld/characters`,
 
-    - **HTTP method** tells server what action to perform, methods match up with *CRUD* operations, e.g., `GET` is *read*,
+    - **HTTP method** tells server what action to perform, methods match up with *CRUD* operations.
 
-    - client sends data in a standard format, e.g., *JSON*.
+    - client sends data in a standard format, e.g., *JSON* (yum) or *XML* (yuck).
 
-- server processes the request: accesses the database and get data ready to return.
+- Server processes the request: 
+
+  typically accesses a database and transforms the data into a format easily processed by the client (JSON, HTML web page).
 
 ---
+
+## The Response
 
 - Server returns a response.
 
@@ -316,7 +297,6 @@ Determine how the three layers in the following examples could be distributed ac
 
 # HTTP Methods
 
-
 - **POST** (*create*) add a new resource.
 
     - Request `POST api/v1/discworld/characters`, body
@@ -338,7 +318,7 @@ Determine how the three layers in the following examples could be distributed ac
 
 - **PUT** (update, see also *PATCH*) modifies an existing resource.
 
-    - Request: `PATCH api/v1/dicworld/characters/4`, body
+    - Request: `PATCH api/v1/discworld/characters/4`, body
         ```
         {"location": "4X"}
         ```
@@ -351,11 +331,15 @@ Determine how the three layers in the following examples could be distributed ac
 
 # HTTP Methods
 
-- **DELETE** (*figure it out yourself!*) removes a resource.
+- **DELETE** (*no prizes for what this deos...*) removes a resource.
 
     - Request: `DELETE api/v1/discworld/characters/4`
 
     - Response: status 200 (OK), empty body.
+
+---
+
+# How ell do you know your HTTP status codes?
 
 ---
 
@@ -369,18 +353,12 @@ Determine how the three layers in the following examples could be distributed ac
     - **404** Not Found (nonexistent resource)
     - **500** Internal Server Error (naughty programmer)
 
+---
+<!-- _class: titlepage invert -->
+
+# Coding challenge
 
 ---
 
-# Task: Make a REST API
-
-- In `setup-db_starter.py`, define your schema and insert some test data.
-
-- Take a look at `app_starter.py` and start up the web server (instructions in the README).
-
-    - Complete the `GET` endpoint in `app_starter.py` to return all books, along with their average rating and number of ratings.
-
-    - Complete the `POST` endpoint in `app_starter.py` to add a rating.
-
-
+## Communicate with a REST api!
 
