@@ -4,6 +4,36 @@ Your task is to create a web frontend to communicate with a rest API.
 
 ## Front-end
 
+Create a responsive web app which allows you to view and rate books, with data from an API.
+
+- The app should show the book's title and author, as well as average star rating and number of ratings.
+- Next, allow the user to submit a rating.
+- If you're done, you could implement update and delete, or make it look pretty, but first...
+
+  make sure you handle errors!
+
+Either run the `server.py` locally (requires `flash`), or ask your tutor to spin up a server.
+
+API endpoints:
+
+  - `GET api/v1/books` returns a list of books,
+  
+    You can visit this URL in a web browser and see the data.
+  - `POST api/v1/books` adds a new book
+    ```{ "title": "Jingo", "author": "Terry Pratchett" }```
+  - `GET api/v1/books/<id>` returns the book with given `id`, or `404` if it doesn't exist,
+  - `PUT api/v1/books/<id>` update a book (`"title"` and `"author"`) by `id`,
+  - `DELETE api/v1/books/<id>` delete the book with given id.
+  - `POST api/v1/books/<id>/ratings` adds a star `{ "rating": 3.5 }` to book with given `id`.
+
+### Not sure where to start?
+
+- You might want to begin by defining static data in your script, then creating a function to load render these in HTML.
+  - Then think about how to `fetch` the books from the API.
+- Alternatively, you might want to start by fetching the data, and then add it to the webpage.
+  - `console.log` is your friend!
+- You're also welcome to team up.
+
 
 ## Backend set-up
 
