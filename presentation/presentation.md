@@ -19,7 +19,6 @@ Credit: Ed Longford
 - **Rest APIs**: what they are, and how to build them.
 - **Coding challenge**: build a web app in JavaScript which uses a rest API.
 
-
 ---
 
 <!-- _class: titlepage invert -->
@@ -56,7 +55,7 @@ Credit: Ed Longford
 
 # Computer system architecture
 
-![w:800 Diagram of the von-neuman architecture of a computer](./vna.png)
+![w:600 Diagram of the von-neuman architecture of a computer](./vna.png)
 
 ---
 
@@ -233,6 +232,13 @@ Determine how the three layers in the following examples could be distributed ac
 
 ![w:1000 Example of rest API](./rest.webp)
 
+<!---
+  Flowchart of client and server:
+  - client sends a request (GET, POST, PUT, DELETE) to https://api.example.com/resource
+  - server returns a JSON response to the client, example data is `{"name": "archana", "age": 40}`
+-->
+
+
 ---
 
 # REST APIs must
@@ -356,9 +362,173 @@ Determine how the three layers in the following examples could be distributed ac
 ---
 <!-- _class: titlepage invert -->
 
+# Making HTTP requests in JavaScript
+
+---
+
+## Fetching data with `fetch`
+
+- We're going to use the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) (check that out at MDN!)
+- It defines
+  - the `Request` object, which lets you define an HTTP reuest
+  - the `Response` object, which represents a server response
+  - the `fetch(...)` method (defined on `window` and `worker`), which allows you to make a `Request`.
+- It's [supported by most modern browsers](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API#browser_compatibility), and is a replacement for [XMLHTTPRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest). 
+
+---
+
+## Making a `Request`
+
+
+The `Request` constructor lets you define an HTTP request object (default 'GET').
+
+```javascript
+req = new Request('http://localhost:8000/api/v1/books')
+```
+
+Make the request by calling
+
+```javascript
+fetch(req)
+```
+
+---
+
+## Promises
+
+- An HTTP request is not instantaneous -- we have to wait for its response.
+- Fetch returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), the result of an *asynchronous action* whose outcome is not yet know, and which might succeed or fail.
+- We can use `Promise.then(...)` to define a function which runs when the promise resolves successfully,
+- and `Promise.catch(...)` to define a function which runs if the promise fails.
+
+---
+
+![w:1000 Promise flowchart](./promises.png)
+
+<!--
+'Flowchart showing how the Promise state transitions between pending, fulfilled, and rejected via then/catch handlers. A pending promise can become either fulfilled or rejected. If fulfilled, the "on fulfillment" handler, or first parameter of the then() method, is executed and carries out further asynchronous actions. If rejected, the error handler, either passed as the second parameter of the then() method or as the sole parameter of the catch() method, gets executed.'
+Image takn from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+-->
+
+---
+
+# Resolving the request
+
+```javascript
+fetch(req).then(res => {
+  if (res.status != 200) {
+    throw new Error("The API's not working!")
+  }
+
+  responseDate = res.json() // decode the response JSON into a JS object
+  // ... do things ...
+})
+```
+
+---
+
+# Error handling
+
+```javascript
+fetch(req).then(res => {
+  ...
+}).catch(e => console.error(e)) // graceful error handling stuff and things
+```
+
+---
+
+## Promises are asynchronous!
+
+Asynchronous code requires a little more thought than procedural code...
+
+```javascript
+let data = null
+
+fetch(req).then(res => {
+  data = res.json()
+  console.log(data) // data is an object
+}).catch(e => console.error(e)) // graceful error handling stuff and things
+
+console.log(data) // data is still null, since the promise has not yet resolved!
+```
+
+... make sure you're accessing data once the promise has resolved. Some HTTP requests can be slow!
+
+---
+
+## Request options
+
+Now we can `GET`, but how can we use other HTTP methods, and how can we send data?
+
+```javascript
+req = new Request('http://localhost:8000/api/v1/books', {
+  method: 'POST',
+  body: JSON.stringify({ foo: 42, bar: "I'm making HTTP requests" })
+})
+```
+
+`Request` doesn't allow us to send 'object's in the `body`, so we need to convert our data into a JSON string before sending it.
+
+---
+
+## That's probably enough to get you started
+
+Read more on MDN!
+
+---
+
+<!-- _class: titlepage invert -->
+
 # Coding challenge
 
 ---
 
-## Communicate with a REST api!
+## Build a web frontend!
 
+Create a responsive web app which allows you to view and rate books, with data from an API.
+
+- The app should show the book's title and author, as well as average star rating and number of ratings.
+- Next, allow the user to submit a rating.
+- If you're done, you could implement update and delete, or make it look pretty, but first...
+
+  make sure you handle errors!
+
+<!--
+  To set up the server:
+  - Either students can run `server.py` (requires flask) and connect via localhost,
+  - or the tutor can run it on their machine, and students can connect via ngrok or similar (that migcht be nice, since students will all be adding data on the same server).
+
+  After people have got the hang of working with the API, start breaking the backend...
+  - Modify server.py to make it return some errors (500 status codes)
+  - add a `time.sleep` to make the request take a long time.
+-->
+
+---
+
+API endpoints:
+
+  - `GET api/v1/books` returns a list of books,
+  
+    You can visit this URL in a web browser and see the data.
+  - `POST api/v1/books` adds a new book
+    ```{ "title": "Jingo", "author": "Terry Pratchett" }```
+  - `GET api/v1/books/<id>` returns the book with given `id`, or `404` if it doesn't exist,
+  - `PUT api/v1/books/<id>` update a book (`"title"` and `"author"`) by `id`,
+  - `DELETE api/v1/books/<id>` delete the book with given id.
+  - `POST api/v1/books/<id>/ratings` adds a star `{ "rating": 3.5 }` to book with given `id`.
+
+---
+
+## Not sure where to start?
+
+- You might want to begin by defining static data in your script, then creating a function to load render these in HTML.
+  - Then think about how to `fetch` the books from the API.
+- Alternatively, you might want to start by fetching the data, and then add it to the webpage.
+  - `console.log` is your friend!
+- You're also welcome to team up.
+
+---
+
+# Next Up ...
+
+See you later!
